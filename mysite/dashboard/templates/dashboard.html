@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Dashboard</title>
+        {% if user.is_authenticated %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <!-- Leaflet JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        <!-- Leaflet.draw CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <!-- Leaflet.draw JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}">
+        <!--BOX Icons-->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <!-- Jquery for scrolling between sections and navbar behaviour-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+      <header>
+        <!--navigation bar-->
+        <a href="{% url 'dashboard_page' %}" class="logo"><strong>Dashboard</strong></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+          <li><a href="{% url 'main_page' %}">Home</a></li>
+          <li><a href="{% url 'polygon_page' %}">New farm</a></li>
+          <li><a href="{% url 'marker_page' %}">New node(s)</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <!--Link to JS-->
+        <script src="{% static 'script.js' %}"></script>
+      </header>
+      <div class="row-items">
+        <!--Profile component-->
+        <div class='container-box '>
+          <h4>Farmer's info</h4>
+          <ul>
+            <li>
+              <p>Username:</p>
+              <p><strong>{{ user.username }}</strong></p>
+              <br>
+              <p>First Name:</p>
+              <p> <strong>{{ user.first_name }}</strong></p>
+              <br>
+              <p>Last Name:</p>
+              <p> <strong>{{ user.last_name }}</strong></p>
+              <br>
+              <p>Email:</p>
+              <p> <strong>{{ user.email }}</strong></p>
+              <br>
+              <p>Date joined:</p>
+              <p> <strong>{{ user.date_joined }}</strong></p>
+            </li>
+          </ul>
+        </div>
+        <!--Map component-->
+        <div class='container-box large'>
+          <div id="map" style="width: 100%; height: 100%;"></div>
+          <script src="{% static 'map.js' %}"></script>
+          <!--Show markers-->
+          <script>
+            {% for marker in markers %}
+                var marker = L.marker([{{ marker.location.y }}, {{ marker.location.x }}]).addTo(map);
+                marker.bindPopup("<strong>Node's name:</strong> "+"{{ marker.name }}");
+            {% endfor %}
+          </script>
+          <!--Show polygons-->
+          <script>
+            {% for polygon in polygons %}
+                var geojson = {{ polygon.geometry.json|safe }};
+                var name = "{{ polygon.name }}";
+                var surface="{{ polygon.surface_area }}";
+                L.geoJSON(geojson).bindPopup("<strong>Farm's name:</strong> " + name).addTo(map);
+            {% endfor %}
+          </script>
+        </div>
+        <!--Alert component-->
+        <div class='container-box'>
+          <h4>Alert History</h4>
+          <br/>
+          <p>#Alert1</p>
+          <p>#Alert2</p>
+          <p>#Alert3</p>
+          <p>#Alert4</p>
+          <p>#Alert5</p>
+          <p>#Alert6</p>
+          <p>#Alert7</p>
+          <p>#Alert8</p>
+          <p>#Alert9</p>
+          <p>#Alert10</p>
+          <p>#Alert11</p>
+          <p>#Alert12</p>
+          <p>#Alert13</p>
+          <p>#Alert14</p>
+        </div>  
+      </div>
+      {% endif %}
+    </body>
+</html>

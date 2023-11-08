@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add node(s)</title>
+    {% if user.is_authenticated %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <!-- Leaflet JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        <!-- Leaflet.draw CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <!-- Leaflet.draw JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'new_farm.css' %}">
+        <!--BOX Icons-->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <!-- Jquery for scrolling between sections and navbar behaviour-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <!--navigation bar-->
+            <a href="{% url 'main_page' %}" class="logo"><strong>FarmGuard</strong></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+            <ul class="navbar">
+                <li><a href="{% url 'main_page' %}">Home</a></li>
+                <li><a href="{% url 'dashboard_page' %}">Dashboard</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+            <script src="{% static 'script.js' %}"></script>
+        </header>
+        <br/>
+        <!--Main component-->
+        <section class="container" id="container">
+            <div class="title">
+                <h2>Add your node(s)</h2>
+            </div>
+            <br>
+            <p style="text-align: center;">Use the marker tool on the map to ping every node's position</p>
+            <div class="row-items">
+                <div class="container-box">
+                    <div><form method="POST" style="width:100%;display: inline-block;">
+                        {% csrf_token %}
+                        <label>Node's name </label>
+                        <input name="name" id="name" type="text" required>
+                        <input name="lat" id="lat" type="text" required hidden>
+                        <input name="lng" id="lng" type="text" required hidden>
+                        <input type="submit" id="add-marker-btn" type="submit" value=" Save " style="background-color: rgb(6, 179, 6);cursor: pointer;border: 0;border-radius: 3px;">
+                    </form></div>
+                    <br>
+                    <div id="map" style="width: 100%; height: 635px;"></div>
+                    <script src="{% static 'mapM.js' %}"></script>
+                    <!--Show markers-->
+                    <script>
+                        {% for marker in markers %}
+                            var marker = L.marker([{{ marker.location.y }}, {{ marker.location.x }}]).addTo(map);
+                            marker.bindPopup("<strong>Node's name:</strong> "+"{{ marker.name }}");
+                        {% endfor %}
+                    </script>
+                    <!--Show polygons-->
+                    <script>
+                        {% for polygon in polygons %}
+                            var geojson = {{ polygon.geometry.json|safe }};
+                            var name = "{{ polygon.name }}";
+                            var surface="{{ polygon.surface_area }}";
+                            L.geoJSON(geojson).bindPopup("<strong>Farm's name:</strong> " + name).addTo(map);
+                        {% endfor %}
+                    </script>
+                </div>
+            </div>
+            <!--Check icon-->
+            <div class="row-items">
+                <div class="container-box" style="border: 0;">
+                    <a href="{% url 'dashboard_page' %}"><i class='bx bxs-check-circle' style="transform: scale(5);color: green;"></i></a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    </body>
+</html>

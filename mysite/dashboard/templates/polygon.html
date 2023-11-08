@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add farm</title>
+        {% if user.is_authenticated %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <!-- Leaflet JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        <!-- Leaflet.draw CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <!-- Leaflet.draw JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'new_farm.css' %}">
+        <!--BOX Icons-->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <!-- Jquery for scrolling between sections and navbar behaviour-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <header>
+        <!--navigation bar-->
+        <a href="{% url 'main_page' %}" class="logo"><strong>FarmGuard</strong></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="{% url 'main_page' %}">Home</a></li>
+            <li><a href="{% url 'dashboard_page' %}">Dashboard</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <script src="{% static 'script.js' %}"></script>
+    </header>
+    <body>
+    <br/>
+    <!--Main component-->
+    <section class="container" id="container">
+        <div class="title">
+            <h2>Add your farm</h2>
+        </div>
+        <br>
+        <p style="text-align: center;">Use the polygon tool on the map to set your farm's boundaries</p>
+        <div class="row-items">
+            <div class="container-box">
+                <div><form method="POST" style="width:100%;display: inline-block;">
+                    {% csrf_token %}
+                    <label>Farm's name </label>
+                    <input name="nameP" id="nameP" type="text" required>
+                    <input name="geometry" id="geometry" type="text" required hidden>
+                    <input type="submit" id="add-polygon-btn" value=" Save " style="background-color: rgb(6, 179, 6);cursor: pointer;border: 0;border-radius: 3px;">
+                </form></div>
+                <br>
+                <div>
+                    {% if error_msg %}
+                        <p style="color: red;"><strong>{{ error_msg }}</strong></p>
+                    {% endif %}
+                </div>
+                <br>
+                <div id="map" style="width: 100%; height: 635px;"></div>
+                <script src="{% static 'mapP.js' %}"></script>
+                <!--Show polygons-->
+                <script>
+                    {% for polygon in polygons %}
+                        var geojson = {{ polygon.geometry.json|safe }};
+                        var name = "{{ polygon.name }}";
+                        var surface="{{ polygon.surface_area }}";
+                        L.geoJSON(geojson).bindPopup("<strong>Farm's name:</strong> " + name + "<br><strong>Surface:</strong> " + surface).addTo(map);
+                    {% endfor %}
+                </script>
+            </div>
+        </div>
+        <!--Arrow icon-->
+        <div class="row-items">
+            <div class="container-box" style="border: 0;">
+                <a href="{% url 'marker_page' %}"><i class='bx bxs-right-arrow-circle' style="transform: scale(5);color: green;"></i></a>
+            </div>
+        </div>
+    </section>
+{% endif %}
+</body>
+</html>

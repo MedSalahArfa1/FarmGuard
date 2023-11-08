@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>FarmGuard</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <!--BOX Icons-->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <!-- Jquery for scrolling between sections and navbar behaviour-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div style="overflow: hidden;">
+            <!--navigation bar-->
+            <header>
+                <a href="#home" class="logo"><strong>FarmGuard</strong></a>
+                <div class="bx bx-menu" id="menu-icon"></div>
+                <ul class="navbar">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#contact">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard_page' %}">Dashboard</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register_user' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </header>
+
+            <!--Home section--->
+            <section class="home" id="home">
+                <div class="home-text">
+                    {% if user.is_authenticated %}
+                    <h1>Welcome,<br>{{ user.username }}</h1>
+                    <p><strong>"Protecting our farms, safeguarding our future,<br>cultivating a sustainable tomorrow."</strong></p>
+                    <a href="{% url 'polygon_page' %}" class="home-btn">New farm</a>
+                    <a href="{% url 'dashboard_page' %}" class="home-btn">View dashboard</a>
+                    {% else %}
+                    <h1>Welcome to<br>FarmGuard</h1>
+                    <p><strong>Your #1 solution for FIRE PREVENTION</strong></p>
+                    <a href="#container" class="home-btn">Why FarmGuard ?</a>
+                    {% endif %}
+                </div>
+            </section>
+
+            <!--container--->
+            <section class="container" id="container">
+                <div class="title">
+                    <h2>First of all,<br>How does fire start?</h2>
+                </div>
+                <br>
+                <p style="transform: scale(1.5);text-align: center;">This equation says it all:</p>
+                <br>
+                <div style="display:flex;justify-content: center;transform: scale(2);"><i class='bx bxs-thermometer'></i><i class='bx bx-droplet' ></i><i class='bx bx-wind' ></i><p>  +  </p><i class='bx bx-leaf' ></i><p>  +  </p><i class='bx bx-meteor'></i><p>  =  </p><i class='bx bxs-hot'></i></div>
+                <div class="row-items">
+                    <div class="container-box">
+                        <h4>Climatic factor</h4>
+                        <p>Temperature > 30°<br>Humidity < 30%<br>Wind speed > 30km/h</p>
+                    </div>
+
+                    <div class="container-box">
+                        <h4>Place's nature</h4>
+                        <p>An area filled with<br>dried out<br>or dead vegetation</p>
+                    </div>
+
+                    <div class="container-box">
+                        <h4>Spark</h4>
+                        <p>a simple spark<br>will be enough<br>to ruin the day</p>
+                    </div>
+                </div>
+                <br><br>
+                <div><a class="arrow" href="#solution"><i class='bx bxs-chevron-down'></i></a></div>
+            </section>
+
+            <!--solution section--->
+            <section class="solution" id="solution">
+                <div class="title">
+                    <h2>Why FarmGuard<br>is the best solution ?</h2>
+                </div>
+                <br>
+                <p style="transform: scale(1.2);text-align: center;">Our solution is based on 3 steps</p>
+                <div class="solution-content">
+
+                    <div class="box" data-modal-target="#modal">
+                        <div class="thum">
+                            <img src="https://i.imgur.com/zEEmnuE.png" alt="">
+                        </div>
+                        <div class="sol-content">
+                            <div class="caption">
+                                <h4>Prediction</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="modal">
+                            <div class="modal-header">
+                            <div class="title">LoRaWAN + Prediciton model</div>
+                            <button data-close-button class="close-button"><i class='bx bxs-x-circle' ></i></button>
+                            </div>
+                            <div class="modal-body">
+                            <p>LoRaWAN is a cloud-based medium access control (MAC) layer protocol, but acts mainly as a network layer protocol for managing communication between LPWAN gateways and end-node devices as a routing protocol, maintained by the LoRa Alliance.
+                                LoRaWAN defines the communication protocol and system architecture for the network, while the LoRa physical layer enables the long-range communication link. LoRaWAN is also responsible for managing the communication frequencies, data rate, and power for all devices.
+                                Devices in the network are asynchronous and transmit when they have data available to send. Data transmitted by an end-node device are received by multiple gateways, which forward the data packets to a centralized network server.
+                                Data are then forwarded to application servers.</p>
+                            </div>
+                    </div>
+                    
+
+                    <div class="box" data-modal-target="#modal2">
+                        <div class="thum">
+                            <img src="https://i.imgur.com/WSC1t80.jpg" alt="">
+                        </div>
+                        <div class="sol-content">
+                            <div class="caption">
+                                <h4>Detection</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="modal2">
+                        <div class="modal-header">
+                        <div class="title">Different types of sensors</div>
+                        <button data-close-button class="close-button"><i class='bx bxs-x-circle' ></i></button>
+                        </div>
+                        <div class="modal-body">
+                        <p>This step relies on many sensors that can work 24/7 and provide us with detailed reports.</p>
+                        <p>Among these sensors we can cite:</p>
+                        <ul>
+                            <li><i class='bx bx-chevrons-right'></i>CO2 sensor</li>
+                            <li><i class='bx bx-chevrons-right'></i>Thermal cameras</li>
+                            <li><i class='bx bx-chevrons-right'></i>Drone</li>
+                            <li><i class='bx bx-chevrons-right'></i>Wind direction sensors</li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="box" data-modal-target="#modal3">
+                        <div class="thum">
+                            <img src="https://i.imgur.com/YayCfoh.png" alt="">
+                        </div>
+                        <div class="sol-content">
+                            <div class="caption">
+                                <h4>Assistance</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="modal3">
+                        <div class="modal-header">
+                        <div class="title">FarmGuard</div>
+                        <button data-close-button class="close-button"><i class='bx bxs-x-circle' ></i></button>
+                        </div>
+                        <div class="modal-body">
+                        <p>All these data are sent securely through our servers to give our farmers a real-time statistics, reports and alerts in case of fire detection.</p>
+                        <p>Everything is available in the dashboard including adding different farms, inspecting alerts' history and many more features that make our app the best in the business</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <br><br>
+                <div><a class="arrow" href="#intervention"><i class='bx bxs-chevron-down'></i></a></div>
+            </section>
+            <div id="overlay"></div>
+
+            <!--intervention section--->
+            <section class="intervention" id="intervention">
+                <div class="title">
+                    <h2>What should I do<br>When I receive a fire alert ?</h2>
+                </div>
+                <br>
+                <p style="transform: scale(1.5);text-align: center;">When FarmGuard send you an alert,<br>please follow these steps:</p>
+                <div class="row-items">
+                    <div class="container-box">
+                        <h1>STEP 1</h1>
+                        <p><strong>Verify</strong></p>
+                        <p>Check the validity of the alert. If you are far away from the farm, call one of the neighbors. Tell them to check if there's any sign of fire</p>
+                        <br>
+                        <i class='bx bx-right-arrow-alt' style="transform: scale(2);"></i>
+                    </div>
+
+                    <div class="container-box">
+                        <h1>STEP 2</h1>
+                        <p><strong>Call for help</strong></p>
+                        <p>Dial the emergency number to notify them about the situation. Provide them with your exact address and specific information about the farm.</p>
+                        <br>
+                        <i class='bx bx-right-arrow-alt' style="transform: scale(2);"></i>
+                    </div>
+
+                    <div class="container-box">
+                        <h1>STEP 3</h1>
+                        <p><strong>Stay safe</strong></p>
+                        <p>Do not panic ! Don't throw yourself in danger. Your life is much more important. Just wait for help and everything will be okay</p>
+                        <br>
+                        <i class='bx bx-check' style="transform: scale(2);"></i>
+                    </div>
+                </div>
+                <br><br>
+                <div><a class="arrow" href="#contact"><i class='bx bxs-chevron-down'></i></a></div>
+            </section>
+
+            <!--footer-->
+            <section id="contact">
+                <div class="footer">
+                    <div class="main">
+                        
+                        <div class="list">
+                            <h4>About company</h4>
+                            <ul>
+                                <div class="thum" style="max-width: 200px;"><a href="http://www.smartforgreen.com/"><img src="https://i.imgur.com/BEwtIBa.png" alt=""></a></div>
+                            </ul>
+                        </div>
+
+                        <div class="list">
+                            <h4>Contact creator</h4>
+                            <div class="social">
+                                <a href="https://www.facebook.com/MedSalahArfa1"><i class='bx bxl-facebook' ></i></a>
+                                <a href="https://instagram.com/med_salah_arfa1"><i class='bx bxl-instagram-alt' ></i></a>
+                                <a href="https://twitter.com/MedSalahArfa1"><i class='bx bxl-twitter' ></i></a>
+                                <a href="https://www.linkedin.com/in/medsalaharfa1"><i class='bx bxl-linkedin' ></i></a>
+                                <a href="mailto:mohamedsalaharfa@gmail.com"><i class='bx bxl-gmail' ></i></a> 
+                            </div>
+                        </div>
+                        
+                        <div class="list">
+                            <h4>Quick links</h4>
+                            <ul>
+                                <li><a href="#container">How does fire start?</a></li>
+                                <li><a href="#solution">Why FarmGuard is the best solution?</a></li>
+                                <li><a href="#intervention">What should I do When I receive a fire alert?</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="end-text">
+                    <p>©2023 FarmGuard</p>
+                </div>
+            </section>
+            
+            <!--link to js--->
+            <script src="{% static 'script.js' %}"></script>
+        </div>
+    </body>
+</html>

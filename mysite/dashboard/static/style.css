@@ -1,0 +1,500 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+:root{
+--bg-color: #fff;
+--text-color: #191A19;
+--second-color: #1E5128;
+--main-color: #4E9F3D;
+--third-color: #D8E9A8;
+--big-font: 6rem;
+--h2-font: 3rem;
+--p-font: 1.1rem;
+}
+
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--second-color);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 30px 18%;
+  transition: ease .40s;
+}
+
+.logo{
+  font-size: 35px;
+  font-weight: 600;
+  Letter-spacing: 1px;
+  color: var(--bg-color);
+}
+
+.navbar{
+  display: flex;
+}
+
+.navbar a{
+  color: var(--bg-color);
+  font-size: var(--p-font);
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 4px;
+  transition: ease .40s;
+}
+
+.navbar a:hover{
+  background: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+  border-radius: 4px;
+}
+
+#menu-icon{
+  color: var(--bg-color);
+  font-size: 35px;
+  z-index: 10001;
+  cursor: pointer;
+  display: none;
+}
+
+section{
+  padding: 80px 18%;
+}
+
+.home{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("https://r4.wallpaperflare.com/wallpaper/577/589/284/fog-pines-grass-faded-wallpaper-aff7315700911878ec0b4cb4ef23223d.jpg");
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  grid-template-columns: repeat(1, 1ƒr);
+  align-items: center;
+}
+.home-text h1{
+  font-size: var(--big-font);
+  Line-height: 1.2;
+  color: var(--bg-color);
+  font-family: 'Paytone One', sans-serif;
+  Letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+.home-text p{
+  color: #ffffffbf;
+  font-size: 20px;
+  font-weight: 400;
+  Line-height: 38px;
+  margin-bottom: 50px;
+}
+.home-btn{
+  display: inline-block;
+  font-size: 16px;
+  padding: 15px 30px;
+  background: #ffffffbf;
+  color: var(--main-color);
+  border-radius: 4px;
+  transition: ease 40s;
+}
+.home-btn:hover{
+  background: var(--bg-color);
+  transform: scale(1.2);
+}
+
+header.sticky{
+  background: var(--bg-color);
+  padding: 10px 18%;
+  box-shadow: rgba(33,35,38,0.1) 0px 10px 10px -10px;
+}
+
+.sticky .logo{
+  color: var(--second-color);
+}
+
+.sticky .navbar a{
+  color: var(--text-color);
+}
+
+.text .h2{
+  font-size: var(--h2-font);
+  line-height: 1.1;
+}
+
+.row-items{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,auto));
+  grid-gap: 2rem;
+  align-items: center;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.container-box{
+  background: var(--bg-color);
+  border: 1px solid #f0eded;
+  padding: 50px 10px;
+  border-radius: 4px;
+  transition: all 1s ease 0s;
+  cursor: default;
+}
+
+.container-img img{
+  height: 85px;
+  width: 85px;
+  padding: 15px;
+  background: var(--bg-color);
+  box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+  border-radius: 4px;
+  margin-bottom: 15px;
+  cursor: default;
+}
+
+.container-box h4{
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.container-box p{
+  font-size: 15px;
+  color: var(--second-color);
+}
+
+.arrow{
+  display:flex;
+  justify-content: center;
+  transform: scale(4);
+  color: var(--second-color);
+}
+.container-box:hover{
+  box-shadow: 5px 30px 56.1276px rgb(55 55 55 / 12%);
+  border: 1px solid transparent;
+  transform: translateY(-3px);
+}
+
+.title{
+  text-align: center;
+}
+
+.title h2{
+  font-size: var(--h2-font);
+  line-height: 1.2;
+}
+
+.solution-content{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,auto));
+  grid-gap: 2rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.thum{
+  position: relative;
+  transition: all .3s cubic-bezier(.445,.05,.55,.95);
+  will-change: filter;
+  cursor: pointer;
+}
+
+.thum img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.thum h3{
+  position: absolute;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--bg-color);
+  top: 36px;
+  right: 40px;
+}
+
+.sol-content{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.caption h4{
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--second-color);
+}
+
+.caption p{
+  font-size: 15px;
+  color: var(--second-color);
+}
+
+.thum:hover{
+  filter: brightness(100%) saturate(2);
+  transform: scale(1.04);
+}
+.map{
+  margin-top: 3rem;
+}
+.map iframe{
+  position: relative;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+#contact{
+background: var(--main-color);
+}
+
+.main{
+display: flex; 
+flex-wrap: wrap; 
+}
+
+.footer{
+ padding: 20px 0; 
+}
+
+.list{
+  width: 33%;
+}
+
+.list h4{
+  font-size: 21px;
+  color: var(--bg-color);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.list h4::before{
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 60px;
+  left: 0;
+  bottom: -10px;
+  background: var(--bg-color);
+}
+
+.list ul li:not(last-child){
+  margin-bottom: 16px;
+}
+
+.list ul li a{
+color: #ffffffbf;
+font-size: var(--p-font);
+display: block;
+transition: .3s;
+}
+
+.list ul li a:hover{
+  color: var(--bg-color);
+  transform: translateX(14px);
+}
+
+.list .social a{
+  height: 40px;
+  width: 40px;
+  background: var(--bg-color);
+  color: var(--main-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  border-radius: 15px;
+  transition: .3s;
+  margin-right: 5px;
+}
+
+.list .social a:hover{
+  transform: scale(1.1);
+}
+
+.end-text{
+  text-align: center;
+  padding-top: 90px;
+}
+
+.end-text p{
+  color: var(--bg-color);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 1400px){
+  header{
+      padding: 17px 3%;
+      transition: .2s;
+  }
+  header.sticky{
+      padding: 10px 3%;
+      transition: .2s;
+  }
+  section{
+      padding: 80px 3%;
+      transition: .2s;
+  }
+  :root{
+      --big-font: 4.5rem;
+      --h2-font: 2.3rem;
+      --p-font: 1rem;
+      transition: .2s;
+  }
+}
+
+@media (max-width: 1040px){
+  #menu-icon{
+      display: block;
+  }
+  .sticky #menu-icon{
+      color: var(--text-color);
+  }
+  .home{
+     height: 88vh; 
+  }
+  .navbar{
+     position: absolute;
+     top: 0;
+     right: -100%; 
+     width: 270px;
+     height: 120vh;
+     background: var(--main-color);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 150px 30px;
+     transition: 0.5s all;
+  }
+  .navbar a{
+      display: block;
+      margin: 1.2rem 0;
+  }
+  .sticky .navbar a{
+      color: var(--bg-color);
+  }
+  .navbar a:hover{
+      color: var(--text-color);
+  }
+  .open{
+      right: 0;
+  }
+  .list{
+      width: 50%;
+      margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 575px){
+  .list{
+    width: 100%; 
+  }
+  :root{
+    --big-font: 3.8rem;
+    --h2-font: 1.8rem;
+    transition: .2s;
+  }
+  .text{
+    text-align: center;
+  }
+  .home{
+    height: 85vh;
+    transition: .2s;
+  }
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.modal,.modal2,.model3 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 5px solid var(--second-color);
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1E5128;
+}
+
+.modal-header .title {
+  padding-top: 5px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--second-color);
+}
+
+.modal-body {
+  padding: 10px 15px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
