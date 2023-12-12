@@ -14,9 +14,9 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-GDAL_LIBRARY_PATH = r'C:\projects1\myvenv\Lib\site-packages\osgeo\gdal302.dll'
-os.environ['GDAL_LIBRARY_PATH'] = r'C:\projects1\myvenv\Lib\site-packages\osgeo\gdal302.dll'
-GEOS_LIBRARY_PATH=r'C:\projects1\myvenv\Lib\site-packages\osgeo\geos_c.dll'
+GDAL_LIBRARY_PATH = r'#path to gdal302.dll'
+os.environ['GDAL_LIBRARY_PATH'] = r'#path to gdal302.dll'
+GEOS_LIBRARY_PATH=r'#path to geos_c.dll'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
