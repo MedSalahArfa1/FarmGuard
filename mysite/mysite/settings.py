@@ -22,7 +22,7 @@ GEOS_LIBRARY_PATH=r'#path to geos_c.dll'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i+89tcz+!n-q0qwh*hb1-6+7=l1#verl(3zwhg4nyw!r+j9v!o'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
